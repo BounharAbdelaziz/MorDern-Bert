@@ -1,5 +1,5 @@
 import os
-os.environ["CUDA_VISIBLE_DEVICES"] = "0"
+import torch
 
 from transformers import (
         AutoTokenizer,
@@ -16,16 +16,16 @@ if __name__ == "__main__":
 
     # Define hyperparameters
     lr = 5e-3
-    batch_size = 16
+    batch_size = 128
     warmup_ratio = 0.05
-    n_epochs = 1
+    n_epochs = 3
     max_length = 512
     eval_steps = 5000
     save_steps = 5000
     logging_steps = 5000
 
     # Define model and dataset paths
-    BASE_MODEL = "asafaya/bert-large-arabic"
+    BASE_MODEL = "google-bert/bert-base-multilingual-cased" # "asafaya/bert-large-arabic"
     DATASET_PATH = "atlasia/AL-Atlas-Moroccan-Darija-Pretraining-Dataset"
     
     # Load dataset
@@ -33,7 +33,10 @@ if __name__ == "__main__":
     
     # Initialize tokenizer and model from English BERT
     tokenizer = AutoTokenizer.from_pretrained(BASE_MODEL)
-    model = AutoModelForMaskedLM.from_pretrained(BASE_MODEL)
+    model = AutoModelForMaskedLM.from_pretrained(
+                                            BASE_MODEL, 
+                                            torch_dtype = torch.bfloat16,
+            )
 
     def tokenize_function(examples, max_length=512):
 
@@ -83,6 +86,7 @@ if __name__ == "__main__":
         save_steps=save_steps,
         save_total_limit=2,
         logging_steps=logging_steps,
+        gradient_accumulation_steps=1,
     )
 
     # Initialize trainer
@@ -98,6 +102,6 @@ if __name__ == "__main__":
     trainer.train()
 
     # Save the fine-tuned model and tokenizer
-    model_save_path = "./arabic_bert_finetuned"
+    model_save_path = "./multilingual_bert_finetuned"
     trainer.save_model(model_save_path)
     tokenizer.save_pretrained(model_save_path)

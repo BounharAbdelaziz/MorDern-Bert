@@ -13,7 +13,7 @@ from torch.utils.data import DataLoader
 if __name__ == "__main__":
     
     lr = 5e-3
-    batch_size = 16
+    batch_size = 128
     warmup_ratio = 0.05
     n_epochs = 1
     eval_steps = 5000
@@ -33,7 +33,7 @@ if __name__ == "__main__":
         model_name, 
         model_kwargs={
             "torch_dtype": torch.bfloat16,
-            # "attn_implementation": "flash_attention_2"
+            "attn_implementation": "flash_attention_2"
         },
         config_kwargs={"config": AutoConfig.from_pretrained(model_name)},
     ).to(device)
@@ -60,7 +60,7 @@ if __name__ == "__main__":
         warmup_ratio=warmup_ratio,
         fp16=False,  # Enable mixed precision training
         bf16=True,
-        batch_sampler=BatchSamplers.NO_DUPLICATES,
+        # batch_sampler=BatchSamplers.NO_DUPLICATES,
         eval_strategy="steps",
         eval_steps=eval_steps,
         save_strategy="steps",
@@ -68,7 +68,7 @@ if __name__ == "__main__":
         save_total_limit=2,
         logging_steps=logging_steps,
         run_name=run_name,
-        gradient_accumulation_steps=4,  # Increased for larger effective batch size
+        gradient_accumulation_steps=1,  # Increased for larger effective batch size
     )
 
     # Use a more efficient optimizer
