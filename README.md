@@ -1,34 +1,63 @@
-# Approach
+# Moroccan Darija SentenceTransformer
 
-1. **Training from scratch**
-   - **a)** On Arabic data **only**  
-   - **b)** On Moroccan Arabic data **only**  
-   - **c)** Mix of both  
+This repository contains a [sentence-transformers](https://www.SBERT.net) model finetuned from [answerdotai/ModernBERT-base](https://huggingface.co/answerdotai/ModernBERT-base) on the [al-atlas-moroccan-darija-pretraining-dataset](https://huggingface.co/datasets/atlasia/AL-Atlas-Moroccan-Darija-Pretraining-Dataset). It maps sentences and paragraphs to a 768-dimensional dense vector space and can be used for semantic textual similarity, semantic search, paraphrase mining, text classification, clustering, and more.
 
-2. **Full Finetuning** *(applies only to model 1-a)*  
-   - **a)** On Moroccan Arabic data **only**  
-   - **b)** Mix of both  
+## Features
+- **Fast and efficient sentence embeddings** for Moroccan Darija.
+- **Finetuned from ModernBERT-base**, optimized for dialectal Arabic.
+- **Supports multiple NLP tasks** including search, classification, and clustering.
 
-3. **LoRA Finetuning** *(applies only to model 1-a)*  
-   - **a)** On Moroccan Arabic data **only**  
-   - **b)** Mix of both  
+## Model Details
+- **Model Type:** Sentence Transformer
+- **Base Model:** [answerdotai/ModernBERT-base](https://huggingface.co/answerdotai/ModernBERT-base)
+- **Maximum Sequence Length:** 8196 tokens
+- **Output Dimensionality:** 768 dimensions
+- **Similarity Function:** Cosine Similarity
+- **Training Dataset:** [al-atlas-moroccan-darija-pretraining-dataset](https://huggingface.co/datasets/atlasia/AL-Atlas-Moroccan-Darija-Pretraining-Dataset)
+- **Weights:** Available on the [Hugging Face hub](https://huggingface.co/atlasia/MorDernBERT-ep-1-lr-0.005)
 
-4. **Finetuning of the base model**  
-   *(trained on English data: `answerdotai/ModernBERT-base`)*  
-   - Perform steps 2 and 3  
+## Installation
+Clone the repository and install the required dependencies:
 
-# Datasets
+```bash
+git clone https://github.com/yourusername/moroccan-darija-embeddings.git
+cd moroccan-darija-embeddings
+pip install -r requirements.txt
+```
 
-1. **Arabic**
-    - https://huggingface.co/datasets/wikimedia/wikipedia/viewer/20231101.ar
+## Usage
+### Loading Pre-trained Embeddings
+You can load the trained model using `sentence-transformers`:
 
-2. **Moroccan Arabic**
-    - atlasia/AL-Atlas-Moroccan-Darija-Pretraining-Dataset
-    - atlasia/Social_Media_Darija_DS
+```python
+from sentence_transformers import SentenceTransformer
 
-# Currently Running
-    - Abdelaziz: 
-        - Training ModernBERT from scratch on `atlasia/AL-Atlas-Moroccan-Darija-Pretraining-Dataset`
-        - Training ModernBERT from scratch on `wikipedia-ar`
-        - Finetuning of arabic BERT on `atlasia/AL-Atlas-Moroccan-Darija-Pretraining-Dataset
-        - Finetuning of multilingual BERT on `atlasia/AL-Atlas-Moroccan-Darija-Pretraining-Dataset`
+model = SentenceTransformer("path/to/moroccan_darija_model")
+embedding = model.encode("جملة بالدارجة")
+```
+
+## Roadmap
+- ✅ Sentence Transformer model finetuned for Moroccan Darija
+- ⏳ Further optimization and finetuning
+- ⏳ Evaluation on downstream NLP tasks
+
+## Currently Running
+### Abdelaziz:
+- Training ModernBERT from scratch on `atlasia/AL-Atlas-Moroccan-Darija-Pretraining-Dataset`
+- Training ModernBERT from scratch on `wikipedia-ar`
+- Finetuning Arabic BERT on `atlasia/AL-Atlas-Moroccan-Darija-Pretraining-Dataset`
+- Finetuning Multilingual BERT on `atlasia/AL-Atlas-Moroccan-Darija-Pretraining-Dataset`
+- 
+## Datasets
+### Arabic
+- [Wikimedia Arabic Wikipedia (Nov 2023)](https://huggingface.co/datasets/wikimedia/wikipedia/viewer/20231101.ar)
+
+### Moroccan Arabic
+- [AL-Atlas Moroccan Darija Pretraining Dataset](https://huggingface.co/datasets/atlasia/AL-Atlas-Moroccan-Darija-Pretraining-Dataset)
+- [Social Media Darija Dataset](https://huggingface.co/datasets/atlasia/Social_Media_Darija_DS)
+
+## Contributing
+Contributions are welcome! Feel free to open issues or submit pull requests to improve the model and codebase.
+
+
+
