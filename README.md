@@ -49,6 +49,7 @@ embedding = model.encode("جملة بالدارجة")
 - Finetuning Multilingual BERT on `atlasia/AL-Atlas-Moroccan-Darija-Pretraining-Dataset`
 ### Abdeljalil
 ✅ Continuous training XLM Roberta Large [Fill Mask Task] `atlasia/xlm-roberta-large-ft-alatlas`
+  - Dataset: `atlasia/AL-Atlas-Moroccan-Darija-Pretraining-Dataset`
   - Test space: `atlasia/Darija-Roberta-mask`
 ## Datasets
 ### Arabic
