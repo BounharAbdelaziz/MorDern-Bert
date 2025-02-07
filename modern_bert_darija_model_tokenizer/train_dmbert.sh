@@ -1,0 +1,1 @@
+python3 pretrain_modern_bert_darija_tokenizer.py
