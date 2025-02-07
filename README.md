@@ -47,7 +47,9 @@ embedding = model.encode("جملة بالدارجة")
 - Training ModernBERT from scratch on `wikipedia-ar`
 - Finetuning Arabic BERT on `atlasia/AL-Atlas-Moroccan-Darija-Pretraining-Dataset`
 - Finetuning Multilingual BERT on `atlasia/AL-Atlas-Moroccan-Darija-Pretraining-Dataset`
-- 
+### Abdeljalil
+✅ Continuous training XLM Roberta Large [Fill Mask Task] `atlasia/xlm-roberta-large-ft-alatlas`
+  - Test space: `atlasia/Darija-Roberta-mask`
 ## Datasets
 ### Arabic
 - [Wikimedia Arabic Wikipedia (Nov 2023)](https://huggingface.co/datasets/wikimedia/wikipedia/viewer/20231101.ar)
