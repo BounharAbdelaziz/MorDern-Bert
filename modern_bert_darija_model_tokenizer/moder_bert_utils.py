@@ -30,7 +30,7 @@ def process(examples,new_tokenizer,configs):
 class Config:
   def __init__(self):
     self.model_name="answerdotai/ModernBERT-base"
-    self.max_lenght=4096*2
+    self.max_length=4096*2
     self.new_vocab_size=64000
     self.mlm_probability=0.15 # Masked Language Proba (15% of input will be masked)
     self.base_dir="./DarijaModern"
