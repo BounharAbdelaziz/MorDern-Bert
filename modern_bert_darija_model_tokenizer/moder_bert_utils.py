@@ -22,7 +22,7 @@ def batch_iter(ds,batch_size=1000):
 
 def process(examples,new_tokenizer,configs):
   return new_tokenizer(
-      examples["train"],
+      examples["text"],
       turncation=True,
       max_length=configs.max_length)
 
